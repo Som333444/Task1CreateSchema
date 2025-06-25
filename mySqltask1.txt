@@ -1,0 +1,46 @@
+Use Tool MySQLWorkbench
+
+First create Database
+
+Create Database LibraryManagement;
+
+
+Create Table BookCategory
+
+
+CREATE TABLE `BookCategory` (
+  `Id` int NOT NULL AUTO_INCREMENT,
+  `BookCategoryName` varchar(50) NOT NULL,
+  `IsActive` bit(1) NOT NULL,
+  `IsDeleted` bit(1) NOT NULL,
+  `CreatedOn` datetime NOT NULL,
+  `CreatedBy` int NOT NULL,
+  `ModifiedOn` datetime DEFAULT NULL,
+  `ModifiedBy` int DEFAULT NULL,
+  PRIMARY KEY (`Id`),
+) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+Create Table Book
+
+CREATE TABLE `Book` (
+  `Id` int NOT NULL AUTO_INCREMENT,
+  `BookCategoryId` int NOT NULL,
+  `BookName` varchar(150) NOT NULL,
+  `AuthorName` varchar(100) DEFAULT NULL,
+  `PublicationName` varchar(150) DEFAULT NULL,
+  `PurchaseDate` datetime DEFAULT NULL,
+  `Price` decimal(10,2) NOT NULL,
+  `FineCharges` int DEFAULT NULL,
+  `AllowedDuration` int DEFAULT NULL,
+  `Quantity` int NOT NULL,
+  `IsActive` bit(1) NOT NULL,
+  `IsDeleted` bit(1) NOT NULL,
+  `CreatedOn` datetime NOT NULL,
+  `CreatedBy` int NOT NULL,
+  `ModifiedOn` datetime DEFAULT NULL,
+  `ModifiedBy` int DEFAULT NULL,
+  PRIMARY KEY (`Id`),
+  KEY `fk_BookCategoryId_Book_BookCategory_idx` (`BookCategoryId`),
+  CONSTRAINT `fk_BookCategoryId_Book_BookCategory` FOREIGN KEY (`BookCategoryId`) REFERENCES `BookCategory` (`Id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
